@@ -1,0 +1,136 @@
+Makanaki's Hotels
+
+1
+https://media.hotels.ng/img/h1339967/562/422/b1/best-western-plus-mydas-hotel-1339967-1.jpg
+
+2
+https://media.hotels.ng/img/h1390389/562/422/b1/fingerprint-hotel-1390389-1.jpg
+
+3
+https://pix10.agoda.net/hotelImages/104/104037/104037_17032718350051926353.jpg?ca=6&ce=1&s=1024x768
+
+4
+https://cf.bstatic.com/xdata/images/hotel/max1280x900/79476196.jpg?k=16f1b387011e6016ffa88f748d8f147b0b0f2381b13591add470f1c9574d6795&o=&hp=1
+
+5
+https://pix10.agoda.net/hotelImages/293227/-1/5c68d08e7d3a81d3ee60e175c2f98fb0.jpg?ca=22&ce=0&s=1024x768
+
+6
+https://cf.bstatic.com/xdata/images/hotel/max1024x768/219629744.jpg?k=7858ba3568a1d94ea92fda23142b83d4f3d665bc079819abb9f84f2a4b90e902&o=&hp=1
+
+7
+https://media.radissonhotels.net/image/park-inn-by-radisson-abeokuta/exteriorview/16256-114883-f63849303_3xl.jpg?impolicy=HomeHero
+
+8
+https://media.radissonhotels.net/image/radisson-hotel-lagos-ikeja/pooloutdoor/16256-117733-f72355365_3xl.jpg?impolicy=CustomCrop&cwidth=800&cheight=610
+
+9
+https://cache.marriott.com/marriottassets/marriott/LOSFP/losfp-exterior-8558-hor-feat.jpg
+
+
+Mydas westernplus hotels
+1.
+{
+    "description": "Best luxury hotel in Owo",
+    "image": "https://media.hotels.ng/img/h1339967/562/422/b1/best-western-plus-mydas-hotel-1339967-1.jpg",
+    "address": "Owo, Ondo State",
+    "price": 45000,
+    "numOfBeds": 50,
+    "numOfBaths": 45,
+    "rating": 5
+},
+
+Fingerprint Hotels
+2.
+{
+    "description": "Affordable hotel to relax in Owo",
+    "image": "https://media.hotels.ng/img/h1390389/562/422/b1/fingerprint-hotel-1390389-1.jpg",
+    "address": "Owo, Ondo State",
+    "price": 15000,
+    "numOfBeds": 15,
+    "numOfBaths": 9,
+    "rating": 4
+},
+
+Sherathon Hotels
+3.
+{
+    "description": "Nigeria best hotel in Abuja",
+    "image": "https://pix10.agoda.net/hotelImages/104/104037/104037_17032718350051926353.jpg?ca=6&ce=1&s=1024x768",
+    "address": "Abuja",
+    "price": 102000,
+    "numOfBeds": 100,
+    "numOfBaths": 95,
+    "rating": 5
+},
+
+Eko hotels
+4.
+{
+    "description": "Comfortable Hotel in Ikeja",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/79476196.jpg?k=16f1b387011e6016ffa88f748d8f147b0b0f2381b13591add470f1c9574d6795&o=&hp=1",
+    "address": "Ikeja",
+    "price": 50000,
+    "numOfBeds": 45,
+    "numOfBaths": 30,
+    "rating": 4.5,
+}
+
+
+Lagos continental Hotels
+5.
+{
+    "description": "Best oustanding hotel in Lagos",
+    "image": "https://pix10.agoda.net/hotelImages/293227/-1/5c68d08e7d3a81d3ee60e175c2f98fb0.jpg?ca=22&ce=0&s=1024x768",
+    "address": "lagos",
+    "price": 100000,
+    "numOfBeds": 40,
+    "numOfBaths": 35,
+    "rating": 5
+},
+
+6.Transcorp Hilton Hotels
+{
+    "description": "Comfortable Hotel in Abuja",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/219629744.jpg?k=7858ba3568a1d94ea92fda23142b83d4f3d665bc079819abb9f84f2a4b90e902&o=&hp=1",
+    "address": "Wuse 2",
+    "price": 95000,
+    "numOfBeds": 120,
+    "numOfBaths": 95,
+    "rating": 5
+},
+
+Park Inn by Radisson Abeokuta
+7.
+{
+    "description": "Simple Hotel in Are",
+    "image": "https://media.radissonhotels.net/image/park-inn-by-radisson-abeokuta/exteriorview/16256-114883-f63849303_3xl.jpg?impolicy=HomeHero",
+    "address": "Abeokuta",
+    "price": 45000,
+    "numOfBeds": 35,
+    "numOfBaths": 25,
+    "rating": 4
+},
+
+Radisson Blu Lagos Ikeja
+8.
+{
+    "description": "Luxury Hotel in Ikeja ",
+    "image": "https://media.radissonhotels.net/image/radisson-hotel-lagos-ikeja/pooloutdoor/16256-117733-f72355365_3xl.jpg?impolicy=CustomCrop&cwidth=800&cheight=610",
+    "address": "Ikeja",
+    "price": 350000,
+    "numOfBeds": 30,
+    "numOfBaths": 15,
+    "rating": 4
+},
+Four Points hotel
+9.
+{
+    "description": "Five star Hotel in Wuse",
+    "image": "https://cache.marriott.com/marriottassets/marriott/LOSFP/losfp-exterior-8558-hor-feat.jpg",
+    "address": "Kuje",
+    "price": 65000,
+    "numOfBeds": 70,
+    "numOfBaths": 60,
+    "rating": 4.5
+},
