@@ -4,7 +4,7 @@ Makanaki's Hotels
 https://media.hotels.ng/img/h1339967/562/422/b1/best-western-plus-mydas-hotel-1339967-1.jpg
 
 2
-https://media.hotels.ng/img/h1390389/562/422/b1/fingerprint-hotel-1390389-1.jpg
+https://media.hotels.ng/img/h1390389/562/422/b1/-hotel-1390389-1.jpg
 
 3
 https://pix10.agoda.net/hotelImages/104/104037/104037_17032718350051926353.jpg?ca=6&ce=1&s=1024x768
@@ -133,4 +133,4 @@ Four Points hotel
     "numOfBeds": 70,
     "numOfBaths": 60,
     "rating": 4.5
-},
+},fingerprint

@@ -4,14 +4,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const router = express_1.default.Router();
 const hotelListController_1 = require("../controller/hotelListController");
 const auth_1 = require("../middleware/auth");
-const router = express_1.default.Router();
 /* GET home page. */
-router.post("/create", auth_1.auth, hotelListController_1.createHotel);
-router.get("/getHotels", hotelListController_1.getHotels);
-router.get("/getHotels/:id", hotelListController_1.getSingleHotel);
-router.get("/user/getHotels/:id", hotelListController_1.getUserHotels);
-router.patch("/update/:id", auth_1.auth, hotelListController_1.updateHotel);
-router.delete("/delete/:id", auth_1.auth, hotelListController_1.deleteHotel);
+// router.get("/", (req,res)=>{
+//   res.send("hello stan")
+// });
+router.get('/', hotelListController_1.getHotels);
+router.get('/new', (req, res) => {
+    res.render('new');
+});
+router.post('/', auth_1.auth, hotelListController_1.createHotel);
+router.get('/:id/update', async (req, res, next) => {
+    let record = await (0, hotelListController_1.getSingleHotel)(req, res, next);
+    res.render("update", { record });
+});
+router.post('/:id', auth_1.auth, hotelListController_1.updateHotel);
+router.post('/delete/:id', auth_1.auth, hotelListController_1.deleteHotel);
+router.get("/logout", (req, res, next) => {
+    res.status(200).clearCookie("id").clearCookie("token").redirect("/hotels");
+});
 exports.default = router;

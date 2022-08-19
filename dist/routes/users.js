@@ -6,11 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const userController_1 = require("../controller/userController");
+const auth_1 = require("../middleware/auth");
 /* GET users listing. */
-router.post("/create", userController_1.createUser);
-router.post("/login", userController_1.loginUser);
-router.get("/getUsers", userController_1.getUsers);
-router.get("/getUsers/:id", userController_1.getSingleUser);
-router.patch("/update/:id", userController_1.updateUser);
-router.delete("/delete/:id", userController_1.deleteUser);
+router.get('/register', (req, res) => {
+    res.render('register');
+});
+router.post('/register', userController_1.createUser);
+router.get('/dashboard', auth_1.auth2, userController_1.getUniqueListing);
+router.get('/login', (req, res) => {
+    res.render("login");
+});
+router.post('/login', userController_1.loginUser);
+//router.post("/create", createUser);
+//router.post("/login", loginUser);
+// router.get("/getUsers", getUsers);
+// router.get("/getUsers/:id", getSingleUser);
+// router.patch("/update/:id", updateUser);
+// router.delete("/delete/:id", deleteUser);
 exports.default = router;

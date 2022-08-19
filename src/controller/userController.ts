@@ -51,10 +51,11 @@ export async function createUser(
       password: passwordHash,
       phoneNumber: req.body.phoneNumber,
     });
-    res.status(201).json({
-      msg: "You have successfully created a user",
-      record,
-    });
+    res.redirect('/login')
+    // res.status(201).json({
+    //   msg: "You have successfully created a user",
+    //   record,
+    // });
   } catch (error) {
     console.log(error);
   }
@@ -75,8 +76,9 @@ export async function loginUser(
     }
     const user = (await UserInstance.findOne({
       where: { email: req.body.email },
+      include:[{model:HotelListingInstance, as:"Listings"}]
     })) as unknown as { [key: string]: string };
-    console.log(user);
+    //console.log(user);
 
     if (!user) {
       res.status(401);
@@ -98,24 +100,22 @@ export async function loginUser(
     }
 
     if (validUser) {
-        res
-        .status(200)
-        .cookie("token", token, {
-          maxAge: 1000 * 60 * 60 * 24 * 7,
-          sameSite: "strict",
+        res.cookie("token", token, {
+          maxAge: 1000 * 60 * 60 * 24,
+          //sameSite: "strict",
           httpOnly: true,
         })
-        .cookie("user", user.id, {
-          maxAge: 1000 * 60 * 60 * 24 * 7,
-          sameSite: "strict",
+        res.cookie("id", id, {
+          maxAge: 1000 * 60 * 60 * 24,
+          //sameSite: "strict",
           httpOnly: true,
         });
-
-      res.json({
-        message: "Successfully logged in",
-        token,
-        user,
-      });
+        res.redirect('/dashboard')
+      // res.json({
+      //   message: "Successfully logged in",
+      //   token,
+      //   user,
+      // });
     }
   } catch (err) {
     console.log(err);
@@ -223,6 +223,22 @@ export async function updateUser(
       route: "/update/:id",
     });
   }
+}
+
+export async function getUniqueListing(req:Request,res:Response,next:NextFunction){
+  let id = req.cookies.id
+  try{
+    const record = await UserInstance.findOne({where:{id},
+    include:[{model:HotelListingInstance, as:'Listings'}]
+    })
+    res.render("dashboardList",{record})
+  }catch(error){
+    res.status(500).json({
+      msg:"failed to read",
+      route: "/read",
+    })
+  }
+  
 }
 
 export async function deleteUser(

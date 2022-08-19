@@ -1,4 +1,8 @@
 import express from "express";
+
+
+
+const router = express.Router();
 import {
   createHotel,
   deleteHotel,
@@ -8,14 +12,27 @@ import {
   updateHotel,
 } from "../controller/hotelListController";
 import { auth } from "../middleware/auth";
-const router = express.Router();
 
 /* GET home page. */
-router.post("/create", auth, createHotel);
-router.get("/getHotels", getHotels);
-router.get("/getHotels/:id", getSingleHotel);
-router.get("/user/getHotels/:id", getUserHotels);
-router.patch("/update/:id", auth, updateHotel);
-router.delete("/delete/:id", auth, deleteHotel);
+// router.get("/", (req,res)=>{
+//   res.send("hello stan")
+// });
 
+router.get('/',getHotels)
+
+router.get('/new',(req,res)=>{
+  res.render('new')
+})
+router.post('/',auth,createHotel)
+
+router.get('/:id/update',async (req,res,next)=>{
+  let record = await getSingleHotel(req,res,next)
+  res.render("update",{record})
+})
+
+router.post('/:id',auth,updateHotel)
+router.post('/delete/:id',auth,deleteHotel)
+router.get("/logout", (req,res, next) => {
+  res.status(200).clearCookie("id").clearCookie("token").redirect("/hotels") 
+}) 
 export default router;

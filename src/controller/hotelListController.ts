@@ -8,7 +8,6 @@ import {
   options,
   updateListingSchema,
 } from "../utils/utils";
-import { any } from "joi";
 
 export async function createHotel(
   req: Request | any,
@@ -20,6 +19,7 @@ export async function createHotel(
   try {
     const validationResult = createListingSchema.validate(req.body, options);
     if (validationResult.error) {
+      console.log(validationResult.error)
       return res.status(400).json({
         Error: validationResult.error.details[0].message,
       });
@@ -27,13 +27,17 @@ export async function createHotel(
     const record = await HotelListingInstance.create({
       id,
       ...req.body,
-      userID,
+      userID
     });
-
-    res.status(201).json({
-      msg: "You have successfully created a Hotel",record,});
+    res.redirect("/dashboard")
+    // res.status(201).json({
+    //   msg: "You have successfully created a HotelList",
+    //   record,
+    // });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({
+      message: "failed to create"
+    });
   }
 }
 
@@ -45,24 +49,25 @@ export async function getHotels(
   try {
     const limit = req.query?.limit as number | undefined;
     const offset = req.query?.offset as number | undefined;
-    const record = await HotelListingInstance.findAndCountAll({
+    const record = await HotelListingInstance.findAll({
       limit,
       offset,
       include: [
         {
           model: UserInstance,
-          attributes: ["id", "firstname", "lastname", "email", "phonenumber"],
-          as: "user",
+          attributes: ["id", "fullName", "email", "phoneNumber"],
+          as: "Users",
         },
       ],
     });
-    res.render("index")
+    res.render("index",{record})
     // res.status(200).json({
     //   msg: "You have successfully fetch all hotelLists",
-    //   count: record.count,
-    //   records: record.rows,
+    //   // count: record
+    //   records: record
     // });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       msg: "failed to read",
       route: "/getHotels",
@@ -83,10 +88,11 @@ export async function getSingleHotel(
          error: "cannot find hotel",
       })
     }
-    res.status(200).json({
-      msg: `you successfully gotten the hotel information with the id of ${id}`,
-      record,
-    });
+    return record
+    // res.status(200).json({
+    //   msg: `you successfully gotten the hotel information with the id of ${id}`,
+    //   record,
+    // });
   } catch (error) {
    console.log(error);
   }
@@ -169,11 +175,11 @@ export async function updateHotel(
       numOfBaths,
       rating,
     });
-
-    res.status(200).json({
-      msg: "You have successfully updated your hotel",
-      updatedRecord,
-    });
+    res.redirect('/dashboard')
+    // res.status(200).json({
+    //   msg: "You have successfully updated your hotel",
+    //   updatedRecord,
+    // });
   } catch (error) {
     console.log(error);
   }
@@ -195,15 +201,16 @@ export async function deleteHotel(
     }
 
     if (userID != record.getDataValue("userID")) {
-      res.status(401).json({
+      return res.status(401).json({
         error: "User Not Authorized",
       });
     }
     const deletedRecord = await record.destroy();
-    return res.status(200).json({
-      msg: `hotel with the id of ${id} has been deleted successfully`,
-      deletedRecord,
-    });
+    res.redirect('/dashboard')
+    // return res.status(200).json({
+    //   msg: `hotel with the id of ${id} has been deleted successfully`,
+    //   deletedRecord,
+    // });
   } catch (error) {
     console.log(error)
   }

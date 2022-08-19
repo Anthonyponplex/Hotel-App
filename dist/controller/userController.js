@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.getSingleUser = exports.getUsers = exports.loginUser = exports.createUser = void 0;
+exports.deleteUser = exports.getUniqueListing = exports.updateUser = exports.getSingleUser = exports.getUsers = exports.loginUser = exports.createUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../model/user");
 const utils_1 = require("../utils/utils");
@@ -45,10 +45,11 @@ async function createUser(req, res, next) {
             password: passwordHash,
             phoneNumber: req.body.phoneNumber,
         });
-        res.status(201).json({
-            msg: "You have successfully created a user",
-            record,
-        });
+        res.redirect('/login');
+        // res.status(201).json({
+        //   msg: "You have successfully created a user",
+        //   record,
+        // });
     }
     catch (error) {
         console.log(error);
@@ -66,8 +67,9 @@ async function loginUser(req, res, next) {
         }
         const user = (await user_1.UserInstance.findOne({
             where: { email: req.body.email },
+            include: [{ model: listings_1.HotelListingInstance, as: "Listings" }]
         }));
-        console.log(user);
+        //console.log(user);
         if (!user) {
             res.status(401);
             res.json({
@@ -85,23 +87,22 @@ async function loginUser(req, res, next) {
             });
         }
         if (validUser) {
-            res
-                .status(200)
-                .cookie("token", token, {
-                maxAge: 1000 * 60 * 60 * 24 * 7,
-                sameSite: "strict",
-                httpOnly: true,
-            })
-                .cookie("user", user.id, {
-                maxAge: 1000 * 60 * 60 * 24 * 7,
-                sameSite: "strict",
+            res.cookie("token", token, {
+                maxAge: 1000 * 60 * 60 * 24,
+                //sameSite: "strict",
                 httpOnly: true,
             });
-            res.json({
-                message: "Successfully logged in",
-                token,
-                user,
+            res.cookie("id", id, {
+                maxAge: 1000 * 60 * 60 * 24,
+                //sameSite: "strict",
+                httpOnly: true,
             });
+            res.redirect('/dashboard');
+            // res.json({
+            //   message: "Successfully logged in",
+            //   token,
+            //   user,
+            // });
         }
     }
     catch (err) {
@@ -127,6 +128,7 @@ async function getUsers(req, res, next) {
                 },
             ],
         });
+        //res.render("index")
         res.status(200).json({
             msg: "You have successfully fetch all HotelList",
             count: record.count,
@@ -202,6 +204,22 @@ async function updateUser(req, res, next) {
     }
 }
 exports.updateUser = updateUser;
+async function getUniqueListing(req, res, next) {
+    let id = req.cookies.id;
+    try {
+        const record = await user_1.UserInstance.findOne({ where: { id },
+            include: [{ model: listings_1.HotelListingInstance, as: 'Listings' }]
+        });
+        res.render("dashboardList", { record });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "failed to read",
+            route: "/read",
+        });
+    }
+}
+exports.getUniqueListing = getUniqueListing;
 async function deleteUser(req, res, next) {
     try {
         const { id } = req.params;

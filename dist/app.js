@@ -14,7 +14,7 @@ const pages_1 = __importDefault(require("./routes/pages"));
 const users_1 = __importDefault(require("./routes/users"));
 const databaseConfig_1 = __importDefault(require("./config/databaseConfig"));
 // dotenv.config()
-databaseConfig_1.default.sync({ force: true }).then(() => {
+databaseConfig_1.default.sync().then(() => {
     console.log('Database connected successfully');
 }).catch(err => {
     console.log(err);
@@ -27,10 +27,10 @@ app.use((0, morgan_1.default)('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
-app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
-app.use('/hotel', users_1.default);
-app.use('/users', listings_1.default);
+app.use(express_1.default.static(path_1.default.join(__dirname, "..", 'public')));
 app.use("/", pages_1.default);
+app.use('/', users_1.default);
+app.use("/hotels", listings_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));

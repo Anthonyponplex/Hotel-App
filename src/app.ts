@@ -12,7 +12,7 @@ import db from './config/databaseConfig'
 // dotenv.config()
 
 
-db.sync({force:true}).then(()=>{
+db.sync().then(()=>{
   console.log('Database connected successfully')
 }).catch(err=>{
   console.log(err)
@@ -31,9 +31,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,"..", 'public')));
 
-app.use('/hotel', usersRouter);
-app.use('/users', listingsRouter);
 app.use("/", pagesRouter);
+app.use('/', usersRouter);
+app.use("/hotels", listingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
