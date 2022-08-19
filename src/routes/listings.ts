@@ -18,8 +18,6 @@ import { auth } from "../middleware/auth";
 //   res.send("hello stan")
 // });
 
-router.get('/',getHotels)
-
 router.get('/new',(req,res)=>{
   res.render('new')
 })

@@ -14,6 +14,7 @@ import {
 import { auth2 } from "../middleware/auth";
 
 /* GET users listing. */
+router.get('/', getHotels)
 
 router.get('/register',(req,res)=>{
   res.render('register')
