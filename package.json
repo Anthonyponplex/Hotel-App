@@ -1,11 +1,12 @@
 {
   "name": "week-6-node-task-pod-g-anthonyponplex",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run compile",
     "start": "node ./bin/www",
     "dev": "ts-node-dev --respawn ./bin/www",
-    "compile": "tsc -w"
+    "compile": "tsc"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
