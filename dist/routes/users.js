@@ -4,10 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const hotelListController_1 = require("../controller/hotelListController");
 const router = express_1.default.Router();
 const userController_1 = require("../controller/userController");
 const auth_1 = require("../middleware/auth");
 /* GET users listing. */
+router.get('/', hotelListController_1.getHotels);
 router.get('/register', (req, res) => {
     res.render('register');
 });
